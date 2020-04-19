@@ -20,7 +20,7 @@ public class MD5HashCheck extends Check {
                 zin.close();
                 return doesEqual;
             } catch (IOException e) {
-                AntiBackdoor.LOGGER.error("An error occured while checking the hash", e);
+                AntiBackdoor.LOGGER.error("An error occurred while checking the hash", e);
             }
             return false;
         };

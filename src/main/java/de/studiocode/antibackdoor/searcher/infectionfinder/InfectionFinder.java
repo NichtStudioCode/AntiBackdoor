@@ -23,7 +23,7 @@ public class InfectionFinder {
             ZipFile zipFile = new ZipFile(file);
             for (FileHeader header : zipFile.getFileHeaders()) {
                 if (!header.getFileName().contains("/") && header.getUncompressedSize() > 1024000) { // only main directory && suspiciously large files over 1024000 bytes (=1000 kiB)
-                    LOGGER.info("Investigating suspicous zipped file \"" + header.getFileName() + "\" with a size of "
+                    LOGGER.info("Investigating suspicious zipped file \"" + header.getFileName() + "\" with a size of "
                             + header.getUncompressedSize() + " bytes (uncompressed)");
                     
                         File temp = FileUtils.createTemporaryFile();
@@ -36,7 +36,7 @@ public class InfectionFinder {
                 }
             }
         } catch (IOException e) {
-            LOGGER.error("An error occured while searching for infections", e);
+            LOGGER.error("An error occurred while searching for infections", e);
         }
 
         return new InfectionTestResult();

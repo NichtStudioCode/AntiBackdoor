@@ -54,7 +54,7 @@ public class BackdoorHashComparer implements BackdoorFinder {
             
             return new TestResult(contains, data + "; File hash: " + hashText);
         } catch (IOException e) {
-            AntiBackdoor.LOGGER.error("An error occured while checking the hash", e);
+            AntiBackdoor.LOGGER.error("An error occurred while checking the hash", e);
         }
         return null;
     }

@@ -1,5 +1,6 @@
 package de.studiocode.antibackdoor.searcher.check;
 
+import de.studiocode.antibackdoor.AntiBackdoor;
 import de.studiocode.antibackdoor.utils.ZipUtils;
 
 import java.io.IOException;
@@ -12,7 +13,7 @@ public class BytesCheck extends Check {
             try {
                 return contentCheck.test(ZipUtils.toByteArray(zin));
             } catch (IOException e) {
-                e.printStackTrace();
+                AntiBackdoor.LOGGER.error("An error occurred", e);
             }
             return false;
         });

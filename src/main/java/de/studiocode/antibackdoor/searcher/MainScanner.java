@@ -2,7 +2,7 @@ package de.studiocode.antibackdoor.searcher;
 
 import de.studiocode.antibackdoor.action.RecommendedAction;
 import de.studiocode.antibackdoor.action.actions.DeleteFile;
-import de.studiocode.antibackdoor.action.actions.DesinfectFile;
+import de.studiocode.antibackdoor.action.actions.DisinfectFile;
 import de.studiocode.antibackdoor.searcher.backdoorfinder.BackdoorFinderManager;
 import de.studiocode.antibackdoor.searcher.infectionfinder.InfectionFinder;
 import de.studiocode.antibackdoor.searcher.infectionfinder.InfectionTestResult;
@@ -31,7 +31,7 @@ public class MainScanner {
             InfectionTestResult result = infectionFinder.searchForInfections(serverJar);
             if (result.isInfected()) {
                 LOGGER.warn("The server jar is infected with Backdoor!");
-                recommendedActions.add(new DesinfectFile(result));
+                recommendedActions.add(new DisinfectFile(result));
             }
         }
         
@@ -50,13 +50,13 @@ public class MainScanner {
                                 InfectionTestResult result = infectionFinder.searchForInfections(file);
                                 if (result.isInfected()) {
                                     LOGGER.warn("The plugin " + file.getName() + " is infected with Backdoor!");
-                                    recommendedActions.add(new DesinfectFile(result));
+                                    recommendedActions.add(new DisinfectFile(result));
                                 } else {
                                     LOGGER.info("No infections found.");
                                 }
                             }
                         } catch (Exception e) {
-                            LOGGER.error("An error occured while scanning the file " + file.getAbsolutePath(), e);
+                            LOGGER.error("An error occurred while scanning the file " + file.getAbsolutePath(), e);
                         }
                     });
         }

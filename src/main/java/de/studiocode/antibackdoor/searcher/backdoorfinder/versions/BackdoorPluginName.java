@@ -50,7 +50,7 @@ public class BackdoorPluginName implements BackdoorFinder {
                 return new TestResult(contains, data + "; Plugin name: " + name);
             }
         } catch (IOException e) {
-            AntiBackdoor.LOGGER.error("An error occured while testing", e);
+            AntiBackdoor.LOGGER.error("An error occurred while testing", e);
         }
         return new TestResult(false, "error");
     }

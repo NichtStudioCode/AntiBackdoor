@@ -1,5 +1,6 @@
 package de.studiocode.antibackdoor.searcher.backdoorfinder;
 
+import de.studiocode.antibackdoor.AntiBackdoor;
 import de.studiocode.antibackdoor.searcher.TestResult;
 import de.studiocode.antibackdoor.searcher.ZipCheckTester;
 import de.studiocode.antibackdoor.searcher.check.Check;
@@ -31,6 +32,7 @@ public abstract class ZipCheckBackdoorFinder extends ZipCheckTester implements B
             }
             return new TestResult(passedChecks.size() > 0, data.toString());
         } catch (ZipException e) {
+            AntiBackdoor.LOGGER.error("An error occurred", e);
             e.printStackTrace();
         }
         return null;

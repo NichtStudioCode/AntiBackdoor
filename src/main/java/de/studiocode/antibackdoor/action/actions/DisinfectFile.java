@@ -8,34 +8,34 @@ import java.io.File;
 
 import static de.studiocode.antibackdoor.AntiBackdoor.LOGGER;
 
-public class DesinfectFile implements RecommendedAction {
+public class DisinfectFile implements RecommendedAction {
 
     private File file;
     private String fileHeaderName;
 
-    public DesinfectFile(File file, String fileHeaderName) {
+    public DisinfectFile(File file, String fileHeaderName) {
         this.file = file;
         this.fileHeaderName = fileHeaderName;
     }
 
-    public DesinfectFile(InfectionTestResult result) {
+    public DisinfectFile(InfectionTestResult result) {
         this(result.getInfectedFile(), result.getInfection());
     }
 
     @Override
     public void performAction() {
-        LOGGER.info("Desinfecting file " + file.getAbsolutePath() + "...");
+        LOGGER.info("Disinfecting file " + file.getAbsolutePath() + "...");
         try {
             ZipFile zipFile = new ZipFile(file);
             zipFile.removeFile(fileHeaderName);
-            LOGGER.info("File successfully desinfected");
+            LOGGER.info("File successfully disinfected");
         } catch (Exception e) {
-            LOGGER.error("An error occured while desinfecting the file " + file.getAbsolutePath(), e);
+            LOGGER.error("An error occurred while disinfecting the file " + file.getAbsolutePath(), e);
         }
     }
 
     @Override
     public String getMessage() {
-        return "Desinfect the file " + file.getAbsolutePath();
+        return "Disinfect the file " + file.getAbsolutePath();
     }
 }
