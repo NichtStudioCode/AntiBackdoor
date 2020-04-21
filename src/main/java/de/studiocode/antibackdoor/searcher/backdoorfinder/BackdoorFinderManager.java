@@ -11,19 +11,19 @@ import java.util.List;
 import static de.studiocode.antibackdoor.AntiBackdoor.LOGGER;
 
 public class BackdoorFinderManager {
-    
+
     private List<BackdoorFinder> backdoorFinder = new ArrayList<>();
-    
+
     public BackdoorFinderManager(boolean pluginNameCheck) {
-        addBackdoorFinder(new BackdoorHashComparer(), new BackdoorFinder2_0(), new BackdoorFinder2_9(),
-                new BackdoorFinder3_0(), new BackdoorFinder3_4(), new BackdoorFinder3_7(), new BackdoorFinder3_11());
+        addBackdoorFinder(new BackdoorHashComparer(), new JpicFinder(), new PluginYymlFinder(),
+                new InfoDataFinder1(), new InfoDataFinder2(), new KotlinModuleFinder(), new LanguageFileFinder());
         if (pluginNameCheck) addBackdoorFinder(new BackdoorPluginName());
     }
-    
+
     private void addBackdoorFinder(BackdoorFinder... backdoorFinder) {
         Collections.addAll(this.backdoorFinder, backdoorFinder);
     }
-    
+
     public boolean isFileBackdoor(File file) {
         for (BackdoorFinder finder : backdoorFinder) {
             String name = finder.getClass().getName().substring(finder.getClass().getName().lastIndexOf(".") + 1);
@@ -38,5 +38,5 @@ public class BackdoorFinderManager {
         }
         return false;
     }
-    
+
 }

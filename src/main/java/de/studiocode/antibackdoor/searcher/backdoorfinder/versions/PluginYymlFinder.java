@@ -4,11 +4,11 @@ import de.studiocode.antibackdoor.searcher.backdoorfinder.ZipCheckBackdoorFinder
 import de.studiocode.antibackdoor.searcher.check.Base64Check;
 import de.studiocode.antibackdoor.searcher.check.Check;
 
-public class BackdoorFinder2_9 extends ZipCheckBackdoorFinder {
+public class PluginYymlFinder extends ZipCheckBackdoorFinder {
 
     private static final Check PLUGIN_YYML_CHECK = new Base64Check("plugin.yyml", false);
     
-    public BackdoorFinder2_9() {
+    public PluginYymlFinder() {
         super(PLUGIN_YYML_CHECK);
     }
     

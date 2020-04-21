@@ -8,7 +8,7 @@ import de.studiocode.antibackdoor.utils.StringUtils;
 
 import java.util.function.Predicate;
 
-public class BackdoorFinder3_0 extends ZipCheckBackdoorFinder {
+public class InfoDataFinder1 extends ZipCheckBackdoorFinder {
 
     private static final Predicate<byte[]> IS_WEIRD_ENCRYPTION = bytes -> {
         String content = new String(bytes);
@@ -18,7 +18,7 @@ public class BackdoorFinder3_0 extends ZipCheckBackdoorFinder {
     private static final Check INFO_FILE_CHECK = new Base64Check("info", false);
     private static final Check DATA_FILE_CHECK = new BytesCheck("data", false, IS_WEIRD_ENCRYPTION);
 
-    public BackdoorFinder3_0() {
+    public InfoDataFinder1() {
         super(INFO_FILE_CHECK, DATA_FILE_CHECK);
     }
 
