@@ -1,4 +1,4 @@
-# What is AntiBackdoor?
+# What is AntiBackdoor
 AntiBackdoor is a tool which helps you remove the Minecraft Trolling/Griefing plugin "Backdoor" from your server.
 
 ## How to use AntiBackdoor
