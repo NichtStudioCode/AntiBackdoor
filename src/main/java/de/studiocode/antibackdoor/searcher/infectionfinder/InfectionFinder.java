@@ -25,14 +25,15 @@ public class InfectionFinder {
                 if (!header.getFileName().contains("/") && header.getUncompressedSize() > 1024000) { // only main directory && suspiciously large files over 1024000 bytes (=1000 kiB)
                     LOGGER.info("Investigating suspicious zipped file \"" + header.getFileName() + "\" with a size of "
                             + header.getUncompressedSize() + " bytes (uncompressed)");
-                    
-                        File temp = FileUtils.createTemporaryFile();
-                        zipFile.extractFile(header, temp.getParent(), temp.getName());
 
-                        boolean infected = backdoorFinderManager.isFileBackdoor(temp);
-                        if (!temp.delete()) LOGGER.error("Temporary file " + temp.getAbsolutePath() + " could not be deleted");
+                    File temp = FileUtils.createTemporaryFile();
+                    zipFile.extractFile(header, temp.getParent(), temp.getName());
 
-                        if (infected) return new InfectionTestResult(file, header.getFileName());
+                    boolean infected = backdoorFinderManager.isFileBackdoor(temp);
+                    if (!temp.delete())
+                        LOGGER.error("Temporary file " + temp.getAbsolutePath() + " could not be deleted");
+
+                    if (infected) return new InfectionTestResult(file, header.getFileName());
                 }
             }
         } catch (IOException e) {
