@@ -1,7 +1,7 @@
-package de.studiocode.antibackdoor.searcher.backdoorfinder.versions;
+package de.studiocode.antibackdoor.searcher.backdoorfinder.finder;
 
 import de.studiocode.antibackdoor.searcher.backdoorfinder.ZipCheckBackdoorFinder;
-import de.studiocode.antibackdoor.searcher.check.MD5HashCheck;
+import de.studiocode.antibackdoor.searcher.check.checks.MD5HashCheck;
 
 public class JpicFinder extends ZipCheckBackdoorFinder {
     

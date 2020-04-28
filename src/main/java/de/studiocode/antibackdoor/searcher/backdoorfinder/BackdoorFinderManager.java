@@ -1,7 +1,7 @@
 package de.studiocode.antibackdoor.searcher.backdoorfinder;
 
 import de.studiocode.antibackdoor.searcher.TestResult;
-import de.studiocode.antibackdoor.searcher.backdoorfinder.versions.*;
+import de.studiocode.antibackdoor.searcher.backdoorfinder.finder.*;
 
 import java.io.File;
 import java.util.ArrayList;

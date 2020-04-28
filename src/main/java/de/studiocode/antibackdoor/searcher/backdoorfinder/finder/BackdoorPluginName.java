@@ -1,4 +1,4 @@
-package de.studiocode.antibackdoor.searcher.backdoorfinder.versions;
+package de.studiocode.antibackdoor.searcher.backdoorfinder.finder;
 
 import de.studiocode.antibackdoor.AntiBackdoor;
 import de.studiocode.antibackdoor.searcher.TestResult;

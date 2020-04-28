@@ -1,4 +1,4 @@
-package de.studiocode.antibackdoor.searcher.check;
+package de.studiocode.antibackdoor.searcher.check.checks;
 
 import java.util.Base64;
 

@@ -1,6 +1,7 @@
-package de.studiocode.antibackdoor.searcher.check;
+package de.studiocode.antibackdoor.searcher.check.checks;
 
 import de.studiocode.antibackdoor.AntiBackdoor;
+import de.studiocode.antibackdoor.searcher.check.Check;
 import de.studiocode.antibackdoor.utils.HashUtils;
 import net.lingala.zip4j.io.inputstream.ZipInputStream;
 

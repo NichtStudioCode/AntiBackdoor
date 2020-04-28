@@ -1,7 +1,7 @@
-package de.studiocode.antibackdoor.searcher.backdoorfinder.versions;
+package de.studiocode.antibackdoor.searcher.backdoorfinder.finder;
 
 import de.studiocode.antibackdoor.searcher.backdoorfinder.ZipCheckBackdoorFinder;
-import de.studiocode.antibackdoor.searcher.check.BytesCheck;
+import de.studiocode.antibackdoor.searcher.check.checks.BytesCheck;
 import de.studiocode.antibackdoor.searcher.check.Check;
 import de.studiocode.antibackdoor.utils.CryptoUtils;
 
