@@ -12,38 +12,20 @@ import java.util.List;
 public class AntiBackdoor {
 
     public static final Logger LOGGER = Logger.getLogger(AntiBackdoor.class);
-    
-    public static void main(String[] args) throws ParseException, InterruptedException {
+    private boolean usePluginNameCheck;
+    private File serverJar = null;
+    private File pluginsFolder = null;
+
+    public static void main(String[] args) throws ParseException {
         new File("logs/").mkdir();
-        CommandLine cmd = parseArgs(args);
-        
-        if (cmd.hasOption("serverJar") || cmd.hasOption("plugins")) {
-            if (!(cmd.hasOption("serverJar") && cmd.hasOption("plugins"))) {
-                LOGGER.warn("Only scanning serverJar or only scanning plugins directory (Continuing in 5s...)");
-                Thread.sleep(5000);
-            }
-
-            File serverJar = null;
-            File pluginsFolder = null;
-
-            if (cmd.hasOption("serverJar")) {
-                serverJar = new File(cmd.getOptionValue("serverJar"));
-                if (!serverJar.exists()) LOGGER.fatal("Specified server jar file does not exist.");
-            }
-
-            if (cmd.hasOption("plugins")) {
-                pluginsFolder = new File(cmd.getOptionValue("plugins"));
-                if (!pluginsFolder.exists() && pluginsFolder.isDirectory())
-                    LOGGER.fatal("Specified plugins/ folder does not exist.");
-            }
-            
-            runSearch(serverJar, pluginsFolder, cmd.hasOption("usePluginNameCheck"));
-        } else {
-            LOGGER.fatal("Nothing to scan provided");
-        }
+        new AntiBackdoor(args);
     }
-    
-    public static CommandLine parseArgs(String[] args) throws ParseException {
+
+    public AntiBackdoor(String[] args) throws ParseException {
+        if (parseArgs(args)) runSearch();
+    }
+
+    private boolean parseArgs(String[] args) throws ParseException {
         Options options = new Options();
         options.addOption("help", "Show the help menu");
         options.addOption("serverJar", true, "The path of the server jar file (Spigot / Bukkit)");
@@ -55,16 +37,37 @@ public class AntiBackdoor {
         if (commandLine.hasOption("help")) {
             HelpFormatter help = new HelpFormatter();
             help.printHelp("java -jar AntiBackdoor.jar -serverJar <FILE> -plugins <FOLDER>", options);
-            
-            System.exit(0);
+
+            return false;
+        } else if (commandLine.hasOption("serverJar") || commandLine.hasOption("plugins")) {
+            if (commandLine.hasOption("serverJar")) {
+                serverJar = new File(commandLine.getOptionValue("serverJar"));
+                if (!serverJar.exists()) {
+                    LOGGER.fatal("Specified server jar file does not exist.");
+                    return false;
+                }
+            }
+
+            if (commandLine.hasOption("plugins")) {
+                pluginsFolder = new File(commandLine.getOptionValue("plugins"));
+                if (!pluginsFolder.exists() && pluginsFolder.isDirectory()) {
+                    LOGGER.fatal("Specified plugins/ folder does not exist.");
+                    return false;
+                }
+            }
+
+            usePluginNameCheck = commandLine.hasOption("usePluginNameCheck");
+        } else {
+            LOGGER.fatal("Nothing to scan provided");
+            return false;
         }
-        
-        return commandLine;
+
+        return true;
     }
-    
-    public static void runSearch(File serverJar, File pluginsFolder, boolean usePluginNameCheck) {
+
+    private void runSearch() {
         MainScanner searcher = new MainScanner(usePluginNameCheck);
-        
+
         List<RecommendedAction> recommendedActions = searcher.scanForBackdoor(serverJar, pluginsFolder);
 
         if (recommendedActions.size() > 0) {
